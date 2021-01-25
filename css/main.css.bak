@@ -60,7 +60,7 @@ ul {
 .Information-0 {
   border-radius: 0px 0px 0px 0px;
   padding: 22px;
-  background-color: #353c47;
+  background-color: red;
   max-width: 100%;
   font-size: 15px;
   color: #fff
