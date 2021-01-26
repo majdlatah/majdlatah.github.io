@@ -72,7 +72,7 @@ ul {
   color: #fff
 }
 .Information-1 > img {
-   margin-left: -40px;
+   margin-left: 0px;
    margin-top: 10px;
    margin-bottom: 10px;
    text-align: left;
@@ -348,7 +348,7 @@ color:#FFF;
 }
 .prof {
   margin-top:  -11px;
-  margin-left: -39px;
+  margin-left: -1px;
   line-height: 13pt;
   font-size: 13px;
   font-weight: bold;
