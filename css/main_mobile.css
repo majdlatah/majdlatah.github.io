@@ -32,8 +32,8 @@ ul {
   "main-0 main-0 main-0"
   "pub-0 pub-0 pub-0"
   "footer footer footer";
-  grid-template-columns: 140px; 20%; 20%;
-  grid-template-rows: 140px 1000px 3000px 600px;
+  grid-template-columns: 200px; 20%; 20%;
+  grid-template-rows: 200px 1000px 3000px 600px;
 
 }
 .container > div {
@@ -58,7 +58,7 @@ ul {
 }
 .Information-0 {
   border-radius: 0px 0px 0px 0px;
-  padding: 22px;
+  padding: 10px;
   background-color: #353c47;
   max-width: 100%;
   font-size: 10px;
