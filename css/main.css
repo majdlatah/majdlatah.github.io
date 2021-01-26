@@ -343,6 +343,7 @@ color:#FFF;
 }
 .prof-name {
    margin-top: -30px;
+   margin-bottom: -5px;
    font-size: 20px;
 }
 .prof {
@@ -355,7 +356,8 @@ color:#FFF;
 
 .prof ul{
      margin-left: -15px;
-	 margin-top: 5px;
+     margin-bottom: -5px;
+     margin-top: 5px;
 }
 .prof a:link {
   font-size: 13px;
