@@ -33,7 +33,7 @@ ul {
   "pub-0 pub-0 pub-0"
   "footer footer footer";
   grid-template-columns: 145px; 20%; 20%;
-  grid-template-rows: 145px 1000px 2870px 600px;
+  grid-template-rows: 145px 1000px 2850px 600px;
 
 }
 .container > div {
@@ -342,7 +342,7 @@ color:#FFF;
   background-color: #555;
 }
 .prof-name {
-   margin-top: 5px;
+   margin-top: 2px;
    margin-bottom: -10px;
    font-size: 15px;
 }
