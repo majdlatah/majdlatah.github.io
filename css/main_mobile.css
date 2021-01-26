@@ -32,8 +32,8 @@ ul {
   "main-0 main-0 main-0"
   "pub-0 pub-0 pub-0"
   "footer footer footer";
-  grid-template-columns: 110px; 20%; 20%;
-  grid-template-rows: 110px 1000px 3000px 700px;
+  grid-template-columns: 140px; 20%; 20%;
+  grid-template-rows: 140px 1000px 3000px 600px;
 
 }
 .container > div {
