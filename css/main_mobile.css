@@ -84,7 +84,7 @@ ul {
   background-color: #E3DED3;
   text-align: justify;
   margin-bottom: 0px;
-  width: 98%;
+  width: 99%;
   color: #353C47
 }
 .bio {
@@ -99,7 +99,7 @@ ul {
   grid-area: pub-0;
   background-color: #E3DED3;
   padding: 3px;
-  width: 98%;
+  width: 99%;
   color: #353C47
 }
 
@@ -108,7 +108,7 @@ ul {
   background-color: #E3DED3;
   border-radius: 0px 0px 20px 20px;
   padding: 20px;
-  width: 98%;
+  width: 99%;
   color: #353C47
 }
 .footerdiv {
@@ -155,7 +155,6 @@ ul {
 }
 .footer2 {
   width: auto;
-  margin-left: -60px;
   text-align: center;
   color: #353C47
 }
@@ -342,7 +341,7 @@ color:#FFF;
   background-color: #555;
 }
 .prof-name {
-   margin-top: 2px;
+   margin-top: 1px;
    margin-bottom: -10px;
    font-size: 15px;
 }
