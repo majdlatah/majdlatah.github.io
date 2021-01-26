@@ -85,7 +85,7 @@ ul {
   background-color: #E3DED3;
   text-align: justify;
   margin-bottom: 0px;
-  width: 83.5%;
+  width: 100%;
   color: #353C47
 }
 .bio {
@@ -100,7 +100,7 @@ ul {
   grid-area: pub-0;
   background-color: #E3DED3;
   padding: 20px;
-  width: 88.9%;
+  width: 100%;
   color: #353C47
 }
 
@@ -109,7 +109,7 @@ ul {
   background-color: #E3DED3;
   border-radius: 0px 0px 20px 20px;
   padding: 20px;
-  width: 88.9%;
+  width: 100%;
   color: #353C47
 }
 .footerdiv {
