@@ -3,7 +3,7 @@ body {
     font-size: 16px;
     line-height: 1.42857;
     color: #353c47;
-	margin-top: 10px;
+    margin-top: 10px;
     margin-left: 50px;
     background-color: #f3f1ec;
 }
@@ -85,7 +85,7 @@ ul {
   background-color: #E3DED3;
   text-align: justify;
   margin-bottom: 0px;
-  width: 867px;
+  width: 890px;
   color: #353C47
 }
 .bio {
@@ -100,7 +100,7 @@ ul {
   grid-area: pub-0;
   background-color: #E3DED3;
   padding: 20px;
-  width: 910px;
+  width: 920px;
   color: #353C47
 }
 
@@ -109,7 +109,7 @@ ul {
   background-color: #E3DED3;
   border-radius: 0px 0px 20px 20px;
   padding: 20px;
-  width: 910px;
+  width: 920px;
   color: #353C47
 }
 .footerdiv {
@@ -342,7 +342,7 @@ color:#FFF;
   background-color: #555;
 }
 .prof-name {
-   margin-top: 0px;
+   margin-top: -30px;
    font-size: 20px;
 }
 .prof {
