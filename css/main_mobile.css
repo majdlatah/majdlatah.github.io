@@ -344,18 +344,18 @@ color:#FFF;
 }
 .prof-name {
    margin-top: -30px;
-   font-size: 16px;
+   font-size: 15px;
 }
 .prof {
   margin-top:  -11px;
   margin-left: -39px;
-  line-height: 15pt;
-  font-size: 15px;
+  line-height: 13pt;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .prof ul{
-     margin-left: -15px;
+     margin-left: -13px;
 	 margin-top: 5px;
 }
 .prof a:link {
