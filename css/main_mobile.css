@@ -68,12 +68,12 @@ ul {
   border-radius: 0px 20px 0px 0px;
   padding: 5px 15px 15px 15px;
   background-color: #353c47;
-  max-width: 95%;
+  max-width: 93%;
   color: #fff
 }
 .Information-1 > img {
    margin-left: 0px;
-   margin-top: 10px;
+   margin-top: 2px;
    margin-bottom: 10px;
    text-align: left;
 }
@@ -84,7 +84,7 @@ ul {
   background-color: #E3DED3;
   text-align: justify;
   margin-bottom: 0px;
-  width: 99%;
+  width: 98%;
   color: #353C47
 }
 .bio {
@@ -99,7 +99,7 @@ ul {
   grid-area: pub-0;
   background-color: #E3DED3;
   padding: 3px;
-  width: 99%;
+  width: 98%;
   color: #353C47
 }
 
@@ -108,7 +108,7 @@ ul {
   background-color: #E3DED3;
   border-radius: 0px 0px 20px 20px;
   padding: 20px;
-  width: 99%;
+  width: 98%;
   color: #353C47
 }
 .footerdiv {
