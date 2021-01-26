@@ -85,7 +85,7 @@ ul {
   background-color: #E3DED3;
   text-align: justify;
   margin-bottom: 0px;
-  width: 922px;
+  width: 917px;
   color: #353C47
 }
 .bio {
@@ -342,7 +342,7 @@ color:#FFF;
   background-color: #555;
 }
 .prof-name {
-   margin-top: 10px;
+   margin-top: -10px;
    margin-bottom: -5px;
    font-size: 20px;
 }
