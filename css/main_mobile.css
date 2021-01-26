@@ -98,7 +98,7 @@ ul {
 .pub-0 {
   grid-area: pub-0;
   background-color: #E3DED3;
-  padding: 20px;
+  padding: 3px;
   width: 94%;
   color: #353C47
 }
@@ -119,7 +119,7 @@ ul {
 	margin-top: 0px;
 }
 .pub-div2 {
-	margin-left: 10px;
+	margin-left: 3px;
 	margin-bottom: 0px;
 }
 .pub-div3 {
@@ -359,7 +359,7 @@ color:#FFF;
 	 margin-top: 5px;
 }
 .prof a:link {
-  font-size: 13px;
+  font-size: 10px;
   text-decoration: none;
   color: #fff;
 }
