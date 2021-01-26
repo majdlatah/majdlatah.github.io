@@ -33,7 +33,7 @@ ul {
   "pub-0 pub-0 pub-0"
   "footer footer footer";
   grid-template-columns: 145px; 20%; 20%;
-  grid-template-rows: 145px 1000px 2850px 600px;
+  grid-template-rows: 145px 1000px 2820px 600px;
 
 }
 .container > div {
@@ -354,7 +354,7 @@ color:#FFF;
 }
 
 .prof ul{
-     margin-left: -13px;
+     margin-left: -23px;
 	 margin-top: 5px;
 }
 .prof a:link {
