@@ -74,7 +74,7 @@ ul {
 }
 .Information-1 > img {
    margin-left: 0px;
-   margin-top: 10px;
+   margin-top: -10px;
    margin-bottom: 10px;
    text-align: left;
 }
