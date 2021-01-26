@@ -3,7 +3,7 @@ body {
     font-size: 16px;
     line-height: 1.42857;
     color: #353c47;
-	margin-top: 10px;
+    margin-top: 10px;
     margin-left: 50px;
     background-color: #f3f1ec;
 }
@@ -34,7 +34,7 @@ ul {
   "pub-0 pub-0 pub-0"
   "footer footer footer";
   grid-template-columns: 220px; 20%; 20%;
-  grid-template-rows: 220px 16% 50% 25%;
+  grid-template-rows: 220px 16% 52% 25%;
 
 }
 .container > div {
@@ -74,7 +74,7 @@ ul {
 }
 .Information-1 > img {
    margin-left: 0px;
-   margin-top: 10px;
+   margin-top: 0px;
    margin-bottom: 10px;
    text-align: left;
 }
@@ -85,12 +85,12 @@ ul {
   background-color: #E3DED3;
   text-align: justify;
   margin-bottom: 0px;
-  width: 867px;
+  width: 917px;
   color: #353C47
 }
 .bio {
   margin-bottom: -10px;
-  margin-top: -10px;
+  margin-top: 0px;
   background-color: #E3DED3;
   font-size: 15.4px;
   color: #353C47
@@ -100,7 +100,7 @@ ul {
   grid-area: pub-0;
   background-color: #E3DED3;
   padding: 20px;
-  width: 910px;
+  width: 917px;
   color: #353C47
 }
 
@@ -109,7 +109,7 @@ ul {
   background-color: #E3DED3;
   border-radius: 0px 0px 20px 20px;
   padding: 20px;
-  width: 910px;
+  width: 917px;
   color: #353C47
 }
 .footerdiv {
@@ -156,7 +156,6 @@ ul {
 }
 .footer2 {
   width: auto;
-  margin-left: -60px;
   text-align: center;
   color: #353C47
 }
@@ -342,7 +341,8 @@ color:#FFF;
   background-color: #555;
 }
 .prof-name {
-   margin-top: 0px;
+   margin-top: -10px;
+   margin-bottom: -5px;
    font-size: 20px;
 }
 .prof {
@@ -355,7 +355,8 @@ color:#FFF;
 
 .prof ul{
      margin-left: -15px;
-	 margin-top: 5px;
+     margin-bottom: -5px;
+     margin-top: 5px;
 }
 .prof a:link {
   font-size: 13px;
