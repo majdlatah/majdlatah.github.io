@@ -34,7 +34,7 @@ ul {
   "pub-0 pub-0 pub-0"
   "footer footer footer";
   grid-template-columns: 220px; 20%; 20%;
-  grid-template-rows: 220px 15.5% 52% 25%;
+  grid-template-rows: 220px 16% 52% 25%;
 
 }
 .container > div {
@@ -74,7 +74,7 @@ ul {
 }
 .Information-1 > img {
    margin-left: 0px;
-   margin-top: -30px;
+   margin-top: 0px;
    margin-bottom: 10px;
    text-align: left;
 }
