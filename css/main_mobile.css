@@ -33,7 +33,7 @@ ul {
   "pub-0 pub-0 pub-0"
   "footer footer footer";
   grid-template-columns: 110px; 20%; 20%;
-  grid-template-rows: 110px 1050px 3000px 1000px;
+  grid-template-rows: 110px 100px 2800px 1000px;
 
 }
 .container > div {
@@ -210,8 +210,8 @@ em {
 {
 	min-height: 2.25em;
 	text-align: center;
+	font-size: 11px;
 	color: #353C47;
-	font-weight: bold;
 	width: 100%;
 	display: block;
 	padding: 0em;
