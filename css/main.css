@@ -52,7 +52,7 @@ ul {
   height: 100%;
 }
 .lab-member {
-  border-radius: 15%;
+  border-radius: 25%;
   background-color: #7A2323;
   width: 122px;
   height: 160px;
@@ -223,6 +223,7 @@ em {
 	text-align: center;
 	width: 100%;
 	display: block;
+	color: #353C47;
 }
 
 
