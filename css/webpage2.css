@@ -6590,7 +6590,7 @@ body {
   position: relative;
 }
 .section > .container > .row {
-  margin: 35px 0px;
+  margin: 0px 0px;
 }
 .section .background-image {
   z-index: -1;
