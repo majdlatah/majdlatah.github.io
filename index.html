@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Majd Latah — Researcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green:        #059669;
+            --blue:         #2563eb;
+            --bg:           #f9fafb;
+            --bg2:          #f3f4f6;
+            --border:       #d1d5db;
+            --border-light: #e5e7eb;
+            --text:         #111827;
+            --muted:        #6b7280;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .terminal-window { max-width: 860px; margin: 0 auto; }
+        .terminal-titlebar { display: none; }
+
+        /* ── NAV ─────────────────────────────────────────── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(249,250,251,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-prompt {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 6px 24px 0;
+            font-size: 11px;
+            letter-spacing: .02em;
+        }
+        .np-user  { color: var(--green); }
+        .np-at    { color: var(--text); }
+        .np-host  { color: var(--blue); }
+        .np-path  { color: var(--text); }
+        .np-dollar { color: var(--text); }
+        nav .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2px 24px 0;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        nav a {
+            display: inline-block;
+            padding: 7px 14px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            border-bottom: 2px solid transparent;
+            transition: color .15s, border-color .15s;
+        }
+        nav a:hover        { color: var(--text); border-bottom-color: var(--border); }
+        nav a.active       { color: var(--blue); border-bottom-color: var(--blue); }
+
+        /* ── LAYOUT ──────────────────────────────────────── */
+        .page { max-width: 960px; margin: 0 auto; padding: 40px 28px 80px; }
+
+        /* ── HERO / PROFILE ──────────────────────────────── */
+        .profile {
+            display: flex;
+            gap: 36px;
+            align-items: flex-start;
+            padding: 40px 0 36px;
+            border-bottom: 1px solid var(--border);
+        }
+        .profile-img-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .profile img {
+            width: 148px;
+            height: 148px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+        }
+        .profile-text { max-width: 580px; }
+        .profile-text h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+            letter-spacing: .01em;
+        }
+        .profile-text h1 .prompt-user  { color: var(--green); }
+        .profile-text h1 .prompt-at    { color: var(--text); opacity: .6; }
+        .profile-text .role {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--muted);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .profile-text p { color: var(--text); line-height: 1.75; text-align: justify; }
+        .profile-text a { color: var(--blue); text-decoration: none; }
+        .profile-text a:hover { color: var(--orange-dim); text-decoration: underline; }
+
+        .topics-row {
+            margin: 16px 0 8px;
+            width: 100%;
+        }
+        .topics-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            margin-bottom: 8px;
+        }
+        .topics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+        .topic-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background: #fff;
+            color: var(--text);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .topic-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blue);
+            flex-shrink: 0;
+        }
+
+        .contact-row {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .contact-row a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 4px 0;
+            transition: color .15s;
+        }
+        .contact-row a i { color: var(--muted); }
+        .contact-row a:hover { color: var(--text); }
+
+        /* ── SECTIONS ─────────────────────────────────────── */
+        section { padding: 48px 0 0; }
+        section h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 22px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        section h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--border), transparent);
+        }
+        section h2::before {
+            content: '';
+            display: inline-block;
+            width: 2px;
+            height: 12px;
+            background: var(--blue);
+            border-radius: 2px;
+        }
+        section h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--border), transparent);
+        }
+
+        /* ── UPDATES ─────────────────────────────────────── */
+        .updates-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .updates-list li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 13px 16px;
+            background: #fff;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            transition: border-left-color .15s, background .15s;
+        }
+        .updates-list li:hover { border-left-color: var(--green); background: var(--bg); }
+        .updates-list li:last-child { border-bottom: none; }
+        .updates-list li i { color: var(--muted); margin-top: 3px; flex-shrink: 0; }
+        .updates-list a { color: var(--blue); text-decoration: none; }
+        .updates-list a:hover { text-decoration: underline; }
+
+        /* ── PUBLICATIONS ────────────────────────────────── */
+        .year-group {
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .year-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: var(--bg2);
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .year-label::before {
+            content: '#';
+            color: var(--blue);
+            font-size: 13px;
+        }
+
+        .pub-card {
+            background: #fff;
+            border: none;
+            border-bottom: 1px solid var(--border-light);
+            border-left: 3px solid transparent;
+            padding: 14px 16px;
+            margin-bottom: 0;
+            transition: border-left-color .15s, background .15s;
+        }
+        .pub-card:hover { border-left-color: var(--blue); background: var(--bg); }
+        .pub-card:last-child { border-bottom: none; }
+        .pub-card .pub-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        .pub-card .pub-title a { color: inherit; text-decoration: none; }
+        .pub-card .pub-title a:hover { color: var(--blue); text-decoration: underline; }
+        .pub-card .pub-meta { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+        .pub-tag {
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 600;
+            padding: 1px 8px;
+            border-radius: 4px;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+        .pub-tag.preprint   { background: #fef3c7; color: #92400e; }
+        .pub-tag.journal    { background: #d1fae5; color: #065f46; }
+        .pub-tag.conference { background: #dbeafe; color: #1e40af; }
+
+        /* ── PROJECTS ─────────────────────────────────────── */
+        .project-card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: transparent;
+            border: none;
+            border-left: 2px solid var(--border);
+            border-bottom: 1px solid var(--border-light);
+            padding: 12px 0 12px 12px;
+            transition: border-left-color .15s;
+        }
+        .project-card:hover { border-left-color: var(--blue); }
+        .project-card i { font-size: 1rem; color: var(--muted); margin-top: 3px; flex-shrink: 0; }
+        .project-card h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+        .project-card p { font-size: 12.5px; color: var(--muted); }
+
+        /* ── TEACHING ─────────────────────────────────────── */
+        .teaching-group {
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .teaching-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: var(--bg2);
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .teaching-year::before { content: '#'; color: var(--green); font-size: 13px; }
+        .teaching-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .teaching-item {
+            background: #fff;
+            border: none;
+            border-bottom: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            padding: 9px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .teaching-item:nth-child(even) { border-right: none; }
+        .teaching-item:nth-last-child(-n+2) { border-bottom: none; }
+        .teaching-item i { color: var(--muted); font-size: 6px; flex-shrink: 0; }
+        .teaching-sem {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            color: var(--muted);
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        /* ── FOOTER ──────────────────────────────────────── */
+        footer {
+            margin-top: 70px;
+            border-top: 1px solid var(--border);
+            padding: 20px 24px;
+            text-align: center;
+            font-size: 11.5px;
+            color: var(--muted);
+        }
+
+        /* blinking cursor */
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.1em;
+            background: var(--text);
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+            margin-left: 3px;
+            border-radius: 1px;
+        }
+
+        /* ── RESPONSIVE ───────────────────────────────────── */
+        @media (max-width: 640px) {
+            .terminal-window { margin: 0; border-radius: 0; border: none; }
+            .page { padding: 24px 16px 60px; }
+
+            /* profile */
+            .profile { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px 0; }
+            .profile img { width: 90px; height: 90px; }
+            .profile-text h1 { font-size: 1.1rem; }
+
+            /* nav */
+            nav .nav-inner { flex-wrap: wrap; padding: 0 8px; gap: 0; }
+            nav a { padding: 6px 10px; font-size: 12px; }
+
+            /* research interests */
+            .topics-grid { grid-template-columns: 1fr; }
+
+            /* publications */
+            .pub-card { padding: 12px 12px; }
+            .pub-card .pub-title { font-size: 13px; }
+
+            /* teaching */
+            .teaching-grid { grid-template-columns: 1fr; }
+            .teaching-item:nth-child(even) { border-right: none; }
+            .teaching-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+            .teaching-item:last-child { border-bottom: none; }
+
+            /* contact */
+            .contact-row { gap: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="#about" class="active">About</a>
+        <a href="#updates">Updates</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#teaching">Teaching</a>
+        <a href="https://majdlatah.net/" target="_blank">Blog</a>
+    </div>
+</nav>
+
+<div class="terminal-window">
+<div class="terminal-titlebar">
+    <span class="dot dot-red"></span>
+    <span class="dot dot-yellow"></span>
+    <span class="dot dot-green"></span>
+    <span class="terminal-title">majd@my_personal_website: <span>~/research</span></span>
+</div>
+
+<div class="page">
+
+    <!-- PROFILE -->
+    <div class="profile" id="about">
+        <div class="profile-img-wrap">
+        <img src="pic-new.jpg" alt="Majd Latah">
+        </div>
+        <div class="profile-text">
+            <h1>Majd Latah</h1>
+            <p>
+                After completing my PhD, I worked as a research associate at the Department of Informatics of the
+                University of Hamburg, where I contributed to the <strong>RESISTANT</strong> project.
+                I received my PhD from the Department of Computer Science at Ozyegin University under the supervision of
+                Dr. <a href="https://scholar.google.com/citations?user=xE0INEMAAAAJ">Kubra Kalkan</a></strong>. 
+            </p>
+            <div class="topics-row">
+                <div class="topics-label">Research Interests</div>
+                <div class="topics-grid">
+                    <span class="topic-tag">Network Security</span>
+                    <span class="topic-tag">Software-Defined Networking</span>
+                    <span class="topic-tag">Blockchain</span>
+                    <span class="topic-tag">Applied Cryptography</span>
+                    <span class="topic-tag">Agentic AI</span>
+                </div>
+            </div>
+            <div class="contact-row">
+                <a href="mailto:latahmajd@gmail.com"><i class="fa-solid fa-envelope"></i> latahmajd@gmail.com</a>
+                <a href="https://scholar.google.com/citations?user=jy6n5E8AAAAJ&hl=tr&oi=ao" target="_blank"><i class="fa-brands fa-google-scholar"></i> Google Scholar</a>
+                <a href="https://github.com/majdlatah" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECENT UPDATES -->
+    <section id="updates">
+        <h2>Recent Updates</h2>
+        <ul class="updates-list">
+            <li>
+                <i class="fa-solid fa-circle-dot"></i>
+                <span>Our recent work <a href="http://arxiv.org/abs/2603.23763">AgenticNet</a> uses an AI coding agent to create hybrid network experiments.</span>
+            </li>
+            <li>
+                <i class="fa-solid fa-circle-dot"></i>
+                <span>We submitted our work on SDN with post-quantum TLS (PQ-TLS).</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+        <h2>Publications</h2>
+
+        <div class="year-group">
+            <div class="year-label">2025</div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://link.springer.com/article/10.1007/s12243-025-01133-w">SDN-API-Sec-Fast: A Performance-Enhanced Conflict-Free Blockchain-based Authorization for Cross-Domain SDNs</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Kalkan, K. · <em>Annals of Telecommunications</em>, 18, 997–1014</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+        </div>
+
+        <div class="year-group">
+            <div class="year-label">2024</div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://ieeexplore.ieee.org/document/10851743">SDN-API-Sec: A Conflict-Free BC-Based Authorization for Cross-Domain SDNs</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Kalkan, K. · <em>CSNet 2024</em>, Paris, France · IEEE</div>
+                <span class="pub-tag conference">Conference</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://ieeexplore.ieee.org/document/10814269">DTN-Core: Towards a framework for designing and operating digital twin networks</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Fischer, M. · <em>CNSM 2024</em>, Prague, Czech Republic · IEEE/IFIP</div>
+                <span class="pub-tag conference">Conference</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://link.springer.com/article/10.1007/s12083-024-01714-x">HostSec: A blockchain-based authentication framework for SDN hosts</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Kalkan, K. · <em>Peer-to-Peer Networking and Applications</em>, 17, 2354–2370</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+        </div>
+
+        <div class="year-group">
+            <div class="year-label">2022</div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://www.sciencedirect.com/science/article/abs/pii/S1389128622004571">CWT-DPA: Component-wise waiting time for BC-enabled data plane authentication</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Kalkan, K. · <em>Computer Networks</em>, 219, 109423</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://cacm.acm.org/magazines/2022/9/263811-when-sdn-and-blockchain-shake-hands/abstract">When SDN and Blockchain Shake Hands</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Kalkan, K. · <em>Communications of the ACM</em>, 65(9), 68–78</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+        </div>
+
+        <div class="year-group">
+            <div class="year-label">2020</div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://ieeexplore.ieee.org/abstract/document/9274449">DPSec: A blockchain-based data plane authentication protocol for SDNs</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Kalkan, K. · <em>BCCA 2020</em>, Antalya, Turkey · IEEE</div>
+                <span class="pub-tag conference">Conference</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://doi.org/10.1016/j.eswa.2020.113383">Detection of Malicious Social Bots: A Survey and a Refined Taxonomy</a>
+                </div>
+                <div class="pub-meta">Latah, M. · <em>Expert Systems with Applications</em>, 151, 113383</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://doi.org/10.1007/s42045-020-00040-z">An Efficient Flow-based Multi-level Hybrid Intrusion Detection System for Software-Defined Networks</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Toker, L. · <em>CCF Transactions on Networking</em>, 3, 261–271</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://link.springer.com/article/10.1007/s42452-019-1917-y">Load and Stress Testing for SDN's Northbound API</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Toker, L. · <em>SN Applied Sciences</em>, 2(122)</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://www.sciencedirect.com/science/article/pii/S2405959519303480">Minimizing False Positive Rate for DoS Attack Detection: A Hybrid SDN-based Approach</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Toker, L. · <em>ICT Express</em>, 6(2), 125–127</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+        </div>
+
+        <div class="year-group">
+            <div class="year-label">2019</div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/iet-net.2018.5082">Artificial Intelligence-Enabled Software-Defined Networking: A Comprehensive Overview</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Toker, L. · <em>IET Networks</em>, 8(2), 79–99</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+        </div>
+
+        <div class="year-group">
+            <div class="year-label">2018</div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-net.2018.5080">Towards an Efficient Anomaly-Based Intrusion Detection for Software-Defined Networks</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Toker, L. · <em>IET Networks</em>, 7(6), 453–459</div>
+                <span class="pub-tag journal">Journal</span>
+            </div>
+        </div>
+
+        <div class="year-group">
+            <div class="year-label">Preprints</div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="http://arxiv.org/abs/2603.23763">AgenticNet: Utilizing AI Coding Agents To Create Hybrid Network Experiments</a>
+                </div>
+                <div class="pub-meta">Latah, M. &amp; Kalkan, K. · 2026 · arXiv</div>
+                <span class="pub-tag preprint">Preprint</span>
+            </div>
+            <div class="pub-card">
+                <div class="pub-title">
+                    <a href="https://arxiv.org/abs/1807.04739">When Deep Learning Meets Security</a>
+                </div>
+                <div class="pub-meta">Latah, M. · 2018 · arXiv</div>
+                <span class="pub-tag preprint">Preprint</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-card">
+            <i class="fa-solid fa-network-wired"></i>
+            <div>
+                <h4>RESISTANT Project</h4>
+                <p>Research associate at the Department of Informatics, University of Hamburg.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching">
+        <h2>Teaching Assistant</h2>
+
+        <div class="teaching-group">
+            <div class="teaching-year">2023</div>
+            <div class="teaching-grid">
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Security for Emerging Network Technologies <span class="teaching-sem">Spring 2023</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Operating Systems <span class="teaching-sem">Spring 2023</span></div>
+            </div>
+        </div>
+
+        <div class="teaching-group">
+            <div class="teaching-year">2022</div>
+            <div class="teaching-grid">
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Distributed Systems and Cloud Computing <span class="teaching-sem">Fall 2022</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Computer Networks <span class="teaching-sem">Fall 2022</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Security for Emerging Network Technologies <span class="teaching-sem">Spring 2022</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Operating Systems <span class="teaching-sem">Spring 2022</span></div>
+            </div>
+        </div>
+
+        <div class="teaching-group">
+            <div class="teaching-year">2021</div>
+            <div class="teaching-grid">
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Distributed Systems and Cloud Computing <span class="teaching-sem">Fall 2021</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Analysis of Algorithms <span class="teaching-sem">Spring 2021</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Operating Systems <span class="teaching-sem">Spring 2021</span></div>
+            </div>
+        </div>
+
+        <div class="teaching-group">
+            <div class="teaching-year">2020</div>
+            <div class="teaching-grid">
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Computer Networks <span class="teaching-sem">Fall 2020</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Security for Emerging Network Technologies <span class="teaching-sem">Spring 2020</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Analysis of Algorithms <span class="teaching-sem">Spring 2020</span></div>
+            </div>
+        </div>
+
+        <div class="teaching-group">
+            <div class="teaching-year">2019</div>
+            <div class="teaching-grid">
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Network Security <span class="teaching-sem">Fall 2019</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Computer Networks <span class="teaching-sem">Fall 2019</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Introduction to Programming <span class="teaching-sem">Spring 2019</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Computer Networks <span class="teaching-sem">Spring 2019</span></div>
+            </div>
+        </div>
+
+        <div class="teaching-group">
+            <div class="teaching-year">2018</div>
+            <div class="teaching-grid">
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Computer Programming for Engineers <span class="teaching-sem">Fall 2018</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Social Network Analysis <span class="teaching-sem">Fall 2018</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> Big Data Analysis <span class="teaching-sem">Fall 2018</span></div>
+                <div class="teaching-item"><i class="fa-solid fa-circle"></i> PHYS101L &amp; PHYS102L <span class="teaching-sem">Spring 2018</span></div>
+            </div>
+        </div>
+
+    </section>
+
+</div><!-- /.page -->
+</div><!-- /.terminal-window -->
+
+
+<script>
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 80) current = s.id;
+        });
+        navLinks.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+    });
+</script>
+
+</body>
+</html>
